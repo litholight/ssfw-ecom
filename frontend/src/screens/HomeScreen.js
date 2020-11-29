@@ -19,7 +19,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <h1>Services available</h1>
+      <h1>New books available</h1>
       {loading ? (
         <Loader />
       ) : error ? (
