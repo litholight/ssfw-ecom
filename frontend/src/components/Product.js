@@ -1,18 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import Rating from './Rating';
 
 const Product = ({ product }) => {
   return (
-    <Card className="my-3 p-3 rounded">
-      <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} varient="top" />
+    <Card
+      className="mr-1 mb-2 rounded"
+      style={{
+        textAlign: 'center',
+      }}
+    >
+      <Link to={`/product/${product._id}`} style={{ margin: '0 auto' }}>
+        <Card.Img
+          src={product.image}
+          variant="top"
+          style={{ height: '266px', width: 'auto' }}
+        />
       </Link>
 
       <Card.Body>
         <Link to={`/product/${product._id}`}>
-          <Card.Title as="div">
+          <Card.Title
+            as="div"
+            style={{
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+            }}
+          >
             <strong>{product.name}</strong>
           </Card.Title>
         </Link>
