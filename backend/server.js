@@ -3,6 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import colors from 'colors';
+import cors from 'cors';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 
@@ -16,6 +17,13 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
