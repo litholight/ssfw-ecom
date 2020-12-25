@@ -21,7 +21,9 @@ const Header = () => {
       <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>Sophia's Used Books</Navbar.Brand>
+            <Navbar.Brand>
+              {userInfo ? userInfo.storeName : 'Your Store Name'}
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

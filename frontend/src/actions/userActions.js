@@ -288,3 +288,46 @@ export const updateUser = (user) => async (dispatch, getState) => {
     });
   }
 };
+
+export const storeCreate = (email, password, storeName) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_LOGIN_REQUEST,
+    });
+
+    const config1 = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response1 = await axios.post(
+      '/api/users/login',
+      { email, password },
+      config1
+    );
+    const { data: userData } = response1;
+
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: userData,
+    });
+
+    localStorage.setItem('userInfo', JSON.stringify(userData));
+
+    const config2 = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
+
+    const { data: response2 } = await axios.post(
+      `/api/store`,
+      { userId: userData._id, storeName },
+      config2
+    );
+    return response2.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

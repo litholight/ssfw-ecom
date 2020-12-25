@@ -21,6 +21,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: true,
     },
+    storeName: {
+      type: String,
+      // required: true,
+      default: '',
+    },
   },
   {
     timestamps: true,

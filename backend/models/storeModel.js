@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 
 const storeSchema = mongoose.Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       require: true,
       ref: 'User',
     },
-    companyName: {
+    storeName: {
       type: String,
       required: true,
     },
@@ -19,4 +19,4 @@ const storeSchema = mongoose.Schema(
 
 const Store = mongoose.model('Store', storeSchema);
 
-export default Product;
+export default Store;

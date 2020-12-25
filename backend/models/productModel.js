@@ -73,6 +73,11 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    store: {
+      type: mongoose.Schema.Types.ObjectId,
+      require: true,
+      ref: 'Store',
+    },
   },
   {
     timeStamps: true,
