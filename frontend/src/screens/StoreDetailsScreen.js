@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-const CreateStore = ({ history, location }) => {
+const StoreDetailsScreen = ({ history, location }) => {
   const [email, setEmail] = useState('');
   const [storeName, setStoreName] = useState('');
   const [password, setPassword] = useState('');
@@ -16,11 +16,15 @@ const CreateStore = ({ history, location }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, userInfo } = userLogin;
 
+  const store = useSelector((state) => state.store);
+
   useEffect(() => {
-    if (userInfo) {
-      history.push('/');
+    if (!userInfo) {
+      history.push('/login');
+    } else {
+      setStoreName(store.storeName);
     }
-  }, [history, userInfo]);
+  }, [dispatch, history]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -28,7 +32,6 @@ const CreateStore = ({ history, location }) => {
   };
   return (
     <Container>
-      <h1>Start your prototype!</h1>
       {error && <Message variant="danger">{error}</Message>}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="storeName">
@@ -40,33 +43,12 @@ const CreateStore = ({ history, location }) => {
             onChange={(e) => setStoreName(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <p>Verify your email and password</p>
-        {loading && <Loader />}
-        <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
         <Button type="submit" variant="primary">
-          Create protoype store
+          Update Store
         </Button>
       </Form>
     </Container>
   );
 };
 
-export default CreateStore;
+export default StoreDetailsScreen;

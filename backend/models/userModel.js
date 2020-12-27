@@ -19,12 +19,12 @@ const userSchema = mongoose.Schema(
     isAdmin: {
       type: Boolean,
       required: true,
-      default: true,
+      default: false,
     },
-    storeName: {
+    ec2Name: {
       type: String,
-      // required: true,
-      default: '',
+      required: false,
+      unique: true,
     },
   },
   {

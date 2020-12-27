@@ -56,3 +56,24 @@ export const createStore = (email, password, storeName) => async (dispatch) => {
     });
   }
 };
+
+// export const getStoreData = (keyword = '') => async (dispatch) => {
+//   try {
+//     dispatch({ type: STORE_DETAILS_REQUEST });
+
+//     const { data } = await axios.get(``);
+
+//     dispatch({
+//       type: PRODUCT_LIST_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: PRODUCT_LIST_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };

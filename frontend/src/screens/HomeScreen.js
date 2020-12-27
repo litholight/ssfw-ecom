@@ -18,6 +18,7 @@ const HomeScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(listProducts(keyword));
+    dispatch(listProducts(keyword));
   }, [dispatch, keyword]);
 
   return (

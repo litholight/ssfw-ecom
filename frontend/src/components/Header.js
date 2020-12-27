@@ -12,6 +12,9 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const store = useSelector((state) => state.store);
+  const { storeData } = store;
+
   const logoutHandler = () => {
     dispatch(logout());
   };
@@ -22,7 +25,7 @@ const Header = () => {
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
-              {userInfo ? userInfo.storeName : 'Your Store Name'}
+              {storeData ? storeData.storeName : 'Your Store Name'}
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -60,6 +63,9 @@ const Header = () => {
                   </LinkContainer>
                   <LinkContainer to="/admin/orderlist">
                     <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/storedetails">
+                    <NavDropdown.Item>Store Details</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}

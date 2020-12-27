@@ -26,6 +26,7 @@ import {
   USER_UPDATE_FAIL,
 } from '../constants/userConstants';
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
+import { STORE_CREATE_SUCCESS } from '../constants/storeContants';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -326,6 +327,11 @@ export const storeCreate = (email, password, storeName) => async (dispatch) => {
       { userId: userData._id, storeName },
       config2
     );
+
+    dispatch({
+      type: STORE_CREATE_SUCCESS,
+      payload: response2,
+    });
     return response2.data;
   } catch (error) {
     console.log(error);
