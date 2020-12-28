@@ -26,7 +26,7 @@ import {
   USER_UPDATE_FAIL,
 } from '../constants/userConstants';
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
-import { STORE_CREATE_SUCCESS } from '../constants/storeContants';
+import { STORE_CREATE_SUCCESS } from '../constants/storeConstants';
 
 export const login = (email, password) => async (dispatch) => {
   try {

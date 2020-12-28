@@ -8,18 +8,29 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import ProductCarousel from '../components/ProductCarousel';
 import { listProducts } from '../actions/productActions';
+import { getStoreData } from '../actions/storeActions';
 
-const HomeScreen = ({ match }) => {
+const HomeScreen = ({ history, match }) => {
   const keyword = match.params.keyword;
+  const uri = 'http://localhost:3000/';
   const dispatch = useDispatch();
+
+  const store = useSelector((state) => state.store);
+  const { loading: loadingStoreData, storeData } = store;
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
+    if (!loadingStoreData) {
+      if (storeData && storeData.storeInitialized === false) {
+        history.push('/createstore');
+      }
+    }
+    dispatch(getStoreData(uri));
     dispatch(listProducts(keyword));
     dispatch(listProducts(keyword));
-  }, [dispatch, keyword]);
+  }, [dispatch, getStoreData, storeData, keyword]);
 
   return (
     <>

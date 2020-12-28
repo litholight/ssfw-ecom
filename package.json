@@ -8,7 +8,8 @@
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "node bootstrap.js",
+    "dev1": "concurrently \"npm run server\" \"npm run client\"",
+    "dev2": "node bootstrap.js",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"

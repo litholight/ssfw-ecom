@@ -27,14 +27,19 @@ const createStore = asyncHandler(async (req, res) => {
 // @desc    Get store data by id
 // @route   GET /api/store/:id
 // @access  Public
-const getStoreData = asyncHandler(async (req, res) => {
-  const store = await Store.findById(req.store._id);
+const getStoreDataFromIP = asyncHandler(async (req, res) => {
+  const { ec2CreatedIP } = req.body;
+
+  console.log(ec2CreatedIP);
+
+  const store = await Store.findOne({ ec2CreatedIP });
 
   if (store) {
     res.json({
-      _id: store._id,
-      userId: user.name,
       storeName: store.storeName,
+      ec2Name: store.ec2Name,
+      ec2CreatedIP: store.ec2CreatedIP,
+      storeInitialized: store.storeInitialized,
     });
   } else {
     res.status(404);
@@ -42,4 +47,4 @@ const getStoreData = asyncHandler(async (req, res) => {
   }
 });
 
-export { createStore };
+export { createStore, getStoreDataFromIP };

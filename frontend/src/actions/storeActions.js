@@ -5,6 +5,12 @@ import {
   USER_LOGIN_FAIL,
 } from '../constants/userConstants';
 
+import {
+  STORE_DATA_REQUEST,
+  STORE_DATA_SUCCESS,
+  STORE_DATA_FAIL,
+} from '../constants/storeConstants';
+
 export const createStore = (email, password, storeName) => async (dispatch) => {
   console.log('trying to dispatch user login');
   try {
@@ -57,23 +63,25 @@ export const createStore = (email, password, storeName) => async (dispatch) => {
   }
 };
 
-// export const getStoreData = (keyword = '') => async (dispatch) => {
-//   try {
-//     dispatch({ type: STORE_DETAILS_REQUEST });
+export const getStoreData = (ec2CreatedIP) => async (dispatch) => {
+  try {
+    dispatch({ type: STORE_DATA_REQUEST });
 
-//     const { data } = await axios.get(``);
+    const { data } = await axios.post('/api/store/data', {
+      ec2CreatedIP,
+    });
 
-//     dispatch({
-//       type: PRODUCT_LIST_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: PRODUCT_LIST_FAIL,
-//       payload:
-//         error.response && error.response.data.message
-//           ? error.response.data.message
-//           : error.message,
-//     });
-//   }
-// };
+    dispatch({
+      type: STORE_DATA_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: STORE_DATA_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

@@ -12,10 +12,9 @@ const Meta = ({ title, description, keywords }) => {
 };
 
 Meta.defaultProps = {
-  title: "Sophia's Used Books",
-  keywords: 'philosophy of science, books, used books, ecommerce, sales',
-  description:
-    'We have one of the largest philosophy of science books collection available',
+  title: 'Your new store',
+  keywords: 'ecommerce, sales, stoneburnersoftware',
+  description: 'We have the best ecommerce platform',
 };
 
 export default Meta;
