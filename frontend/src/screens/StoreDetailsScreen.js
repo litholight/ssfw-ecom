@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getStoreData } from '../actions/storeActions';
-import { Link } from 'react-router-dom';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+// import { getStoreDataFromIPorName } from '../actions/storeActions';
+// import { Link } from 'react-router-dom';
+import { Container, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
-import Loader from '../components/Loader';
+// import Loader from '../components/Loader';
 
 const StoreDetailsScreen = ({ history, location }) => {
   const [storeName, setStoreName] = useState('');
@@ -12,9 +12,9 @@ const StoreDetailsScreen = ({ history, location }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { error, userInfo } = userLogin;
 
-  const store = useSelector((state) => state.store);
+  // const store = useSelector((state) => state.store);
 
   useEffect(() => {
     if (!userInfo) {

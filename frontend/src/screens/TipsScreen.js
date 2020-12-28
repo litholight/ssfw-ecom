@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
-import { storeCreate } from '../actions/userActions';
-import { Link } from 'react-router-dom';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+// import { storeCreate } from '../actions/userActions';
+import { Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import Message from '../components/Message';
-import Loader from '../components/Loader';
 
 const TipsScreen = ({ history, location }) => {
-  const [email, setEmail] = useState('');
-  const [storeName, setStoreName] = useState('');
-  const [password, setPassword] = useState('');
-
-  const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { error, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
@@ -23,10 +15,10 @@ const TipsScreen = ({ history, location }) => {
     }
   }, [history, userInfo]);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    dispatch(storeCreate(email, password, storeName));
-  };
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   dispatch(storeCreate(email, password, storeName));
+  // };
   return (
     <Container>
       <h1>Welcome to your new store</h1>

@@ -7,29 +7,30 @@ import Product from '../components/Product';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import ProductCarousel from '../components/ProductCarousel';
-import { listProducts } from '../actions/productActions';
-import { getStoreData } from '../actions/storeActions';
+// import { listProducts } from '../actions/productActions';
+import { getStoreDataFromIPorName } from '../actions/storeActions';
 
 const HomeScreen = ({ history, match }) => {
   const keyword = match.params.keyword;
   const uri = 'http://localhost:3000/';
   const dispatch = useDispatch();
 
-  const userLogin = useSelector((state) => state.userLogin);
+  // const userLogin = useSelector((state) => state.userLogin);
 
-  const { userInfo } = userLogin;
+  // const { userInfo } = userLogin;
 
   const store = useSelector((state) => state.store);
-  const { loading: loadingStoreData, storeData } = store;
+  const { storeData } = store;
 
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    if (!userInfo) {
-      history.push('/tips');
+    if (!storeData) {
+      dispatch(getStoreDataFromIPorName(null, uri));
+      // history.push('/tips');
     }
-  });
+  }, [storeData, dispatch]);
 
   // useEffect(() => {
   //   if (!loadingStoreData) {

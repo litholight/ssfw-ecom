@@ -26,8 +26,8 @@ import {
   USER_UPDATE_FAIL,
 } from '../constants/userConstants';
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
-import { STORE_CREATE_SUCCESS } from '../constants/storeConstants';
-import { getStoreData } from './storeActions';
+// import { STORE_CREATE_SUCCESS } from '../constants/storeConstants';
+import { getStoreDataFromIPorName } from './storeActions';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -52,7 +52,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
 
-    dispatch(getStoreData(data.ec2Name));
+    dispatch(getStoreDataFromIPorName(data.ec2Name));
 
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -293,50 +293,50 @@ export const updateUser = (user) => async (dispatch, getState) => {
   }
 };
 
-export const storeCreate = (email, password, storeName) => async (dispatch) => {
-  try {
-    dispatch({
-      type: USER_LOGIN_REQUEST,
-    });
+// export const storeCreate = (email, password, storeName) => async (dispatch) => {
+//   try {
+//     dispatch({
+//       type: USER_LOGIN_REQUEST,
+//     });
 
-    const config1 = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+//     const config1 = {
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     };
 
-    const response1 = await axios.post(
-      '/api/users/login',
-      { email, password },
-      config1
-    );
-    const { data: userData } = response1;
+//     const response1 = await axios.post(
+//       '/api/users/login',
+//       { email, password },
+//       config1
+//     );
+//     const { data: userData } = response1;
 
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: userData,
-    });
+//     dispatch({
+//       type: USER_LOGIN_SUCCESS,
+//       payload: userData,
+//     });
 
-    localStorage.setItem('userInfo', JSON.stringify(userData));
+//     localStorage.setItem('userInfo', JSON.stringify(userData));
 
-    const config2 = {
-      headers: {
-        Authorization: `Bearer ${userData.token}`,
-      },
-    };
+//     const config2 = {
+//       headers: {
+//         Authorization: `Bearer ${userData.token}`,
+//       },
+//     };
 
-    const { data: response2 } = await axios.post(
-      `/api/store`,
-      { userId: userData._id, storeName },
-      config2
-    );
+//     const { data: response2 } = await axios.post(
+//       `/api/store`,
+//       { userId: userData._id, storeName },
+//       config2
+//     );
 
-    dispatch({
-      type: STORE_CREATE_SUCCESS,
-      payload: response2,
-    });
-    return response2.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     dispatch({
+//       type: STORE_CREATE_SUCCESS,
+//       payload: response2,
+//     });
+//     return response2.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

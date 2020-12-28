@@ -27,12 +27,16 @@ const createStore = asyncHandler(async (req, res) => {
 // @desc    Get store data by ec2Name
 // @route   POST /api/store/data
 // @access  Public
-const getStoreDataFromIP = asyncHandler(async (req, res) => {
-  const { ec2Name } = req.body;
+const getStoreDataFromIPorName = asyncHandler(async (req, res) => {
+  const { ec2Name, ec2CreatedIP } = req.body;
 
-  // console.log(ec2Name);
+  let store;
 
-  const store = await Store.findOne({ ec2Name });
+  if (ec2Name) {
+    store = await Store.findOne({ ec2Name });
+  } else {
+    store = await Store.findOne({ ec2CreatedIP });
+  }
 
   if (store) {
     res.json({
@@ -66,4 +70,4 @@ const updateStoreData = asyncHandler(async (req, res) => {
   }
 });
 
-export { createStore, getStoreDataFromIP, updateStoreData };
+export { createStore, getStoreDataFromIPorName, updateStoreData };

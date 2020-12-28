@@ -30,7 +30,6 @@ import {
   orderListReducer,
 } from './reducers/orderReducers';
 import {
-  storeCreateReducer,
   storeDataReducer,
   updateStoreDataReducer,
 } from './reducers/storeReducer';
@@ -57,7 +56,6 @@ const reducer = combineReducers({
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
-  // storeCreate: storeCreateReducer,
   store: storeDataReducer,
   updateStoreData: updateStoreDataReducer,
 });

@@ -66,18 +66,31 @@ export const createStore = (email, password, storeName) => async (dispatch) => {
   }
 };
 
-export const getStoreData = (ec2Name) => async (dispatch) => {
+export const getStoreDataFromIPorName = (ec2Name, ec2CreatedIP) => async (
+  dispatch
+) => {
   try {
     dispatch({ type: STORE_DATA_REQUEST });
 
-    const { data } = await axios.post('/api/store/data', {
-      ec2Name,
-    });
+    if (ec2Name) {
+      const { data } = await axios.post('/api/store', {
+        ec2Name,
+      });
 
-    dispatch({
-      type: STORE_DATA_SUCCESS,
-      payload: data,
-    });
+      dispatch({
+        type: STORE_DATA_SUCCESS,
+        payload: data,
+      });
+    } else {
+      const { data } = await axios.post('/api/store', {
+        ec2CreatedIP,
+      });
+
+      dispatch({
+        type: STORE_DATA_SUCCESS,
+        payload: data,
+      });
+    }
   } catch (error) {
     dispatch({
       type: STORE_DATA_FAIL,

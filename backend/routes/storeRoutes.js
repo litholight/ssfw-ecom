@@ -2,15 +2,15 @@ import express from 'express';
 const router = express.Router();
 import {
   createStore,
-  getStoreDataFromIP,
+  getStoreDataFromIPorName,
   updateStoreData,
 } from '../controllers/storeController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
+// router.route('/data').post(getStoreDataFromIPorName);
 router
   .route('/')
-  .post(protect, admin, createStore)
+  .post(getStoreDataFromIPorName)
   .put(protect, admin, updateStoreData);
-router.route('/data').post(getStoreDataFromIP);
 
 export default router;
