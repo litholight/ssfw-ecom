@@ -26,6 +26,11 @@ const userSchema = mongoose.Schema(
       required: false,
       unique: true,
     },
+    timesSignedIn: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,

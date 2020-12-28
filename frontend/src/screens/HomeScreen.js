@@ -15,6 +15,10 @@ const HomeScreen = ({ history, match }) => {
   const uri = 'http://localhost:3000/';
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+
+  const { userInfo } = userLogin;
+
   const store = useSelector((state) => state.store);
   const { loading: loadingStoreData, storeData } = store;
 
@@ -22,15 +26,21 @@ const HomeScreen = ({ history, match }) => {
   const { loading, error, products } = productList;
 
   useEffect(() => {
-    if (!loadingStoreData) {
-      if (storeData && storeData.storeInitialized === false) {
-        history.push('/createstore');
-      }
+    if (!userInfo) {
+      history.push('/tips');
     }
-    dispatch(getStoreData(uri));
-    dispatch(listProducts(keyword));
-    dispatch(listProducts(keyword));
-  }, [dispatch, getStoreData, storeData, keyword]);
+  });
+
+  // useEffect(() => {
+  //   if (!loadingStoreData) {
+  //     if (storeData && storeData.storeInitialized === false) {
+  //       history.push('/createstore');
+  //     }
+  //   }
+  //   dispatch(getStoreData(uri));
+  //   dispatch(listProducts(keyword));
+  //   dispatch(listProducts(keyword));
+  // }, [dispatch, getStoreData, storeData, keyword]);
 
   return (
     <>

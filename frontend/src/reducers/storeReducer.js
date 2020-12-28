@@ -26,3 +26,16 @@ export const storeDataReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const updateStoreDataReducer = (state = {}, action) => {
+  switch (action.type) {
+    case STORE_DATA_REQUEST:
+      return { loading: true };
+    case STORE_DATA_SUCCESS:
+      return { loading: false, success: true, userInfo: action.payload };
+    case STORE_DATA_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};

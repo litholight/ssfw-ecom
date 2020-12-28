@@ -14,11 +14,6 @@ const storeSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    storeInitialized: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
   },
   {
     timeStamps: true,

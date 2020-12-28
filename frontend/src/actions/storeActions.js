@@ -9,6 +9,9 @@ import {
   STORE_DATA_REQUEST,
   STORE_DATA_SUCCESS,
   STORE_DATA_FAIL,
+  STORE_UPDATE_REQUEST,
+  STORE_UPDATE_SUCCESS,
+  STORE_UPDATE_FAIL,
 } from '../constants/storeConstants';
 
 export const createStore = (email, password, storeName) => async (dispatch) => {
@@ -63,12 +66,12 @@ export const createStore = (email, password, storeName) => async (dispatch) => {
   }
 };
 
-export const getStoreData = (ec2CreatedIP) => async (dispatch) => {
+export const getStoreData = (ec2Name) => async (dispatch) => {
   try {
     dispatch({ type: STORE_DATA_REQUEST });
 
     const { data } = await axios.post('/api/store/data', {
-      ec2CreatedIP,
+      ec2Name,
     });
 
     dispatch({
@@ -78,6 +81,44 @@ export const getStoreData = (ec2CreatedIP) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: STORE_DATA_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateStoreData = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: STORE_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const {
+      store: { ec2CreatedIP },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/store`, { ec2CreatedIP }, config);
+
+    dispatch({
+      type: STORE_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: STORE_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

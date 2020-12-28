@@ -17,6 +17,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      ec2Name: user.ec2Name,
       token: generateToken(user._id),
     });
   } else {

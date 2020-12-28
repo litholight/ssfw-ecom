@@ -27,6 +27,7 @@ import {
 } from '../constants/userConstants';
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
 import { STORE_CREATE_SUCCESS } from '../constants/storeConstants';
+import { getStoreData } from './storeActions';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -50,6 +51,8 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
+
+    dispatch(getStoreData(data.ec2Name));
 
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { storeCreate } from '../actions/userActions';
+import { getStoreData } from '../actions/storeActions';
 import { Link } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,9 +7,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 
 const StoreDetailsScreen = ({ history, location }) => {
-  const [email, setEmail] = useState('');
   const [storeName, setStoreName] = useState('');
-  const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
@@ -21,14 +19,12 @@ const StoreDetailsScreen = ({ history, location }) => {
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
-    } else {
-      setStoreName(store.storeName);
     }
-  }, [dispatch, history]);
+  }, [dispatch, history, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(storeCreate(email, password, storeName));
+    // dispatch(storeCreate(email, password, storeName));
   };
   return (
     <Container>
